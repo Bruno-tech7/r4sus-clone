@@ -1,17 +1,42 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Navbar } from '../components/Navbar'
 import { getProductBySlug } from '../data/products'
+import { FORMSPREE_ID } from '../config'
 
 export function ProductPage() {
   const { slug } = useParams<{ slug: string }>()
   const product = getProductBySlug(slug || '')
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSubmitted(true)
+    setSending(true)
+    setError(false)
+
+    const form = e.currentTarget
+    const data = new FormData(form)
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      })
+      if (res.ok) {
+        setSubmitted(true)
+        form.reset()
+      } else {
+        setError(true)
+      }
+    } catch {
+      setError(true)
+    } finally {
+      setSending(false)
+    }
   }
 
   if (!product) {
@@ -20,10 +45,7 @@ export function ProductPage() {
         <Navbar />
         <div className="container pt-32 text-center">
           <h1 className="font-display text-3xl font-bold text-foreground">Product not found</h1>
-          <Link
-            to="/#products"
-            className="mt-4 inline-block text-primary hover:underline"
-          >
+          <Link to="/#products" className="mt-4 inline-block text-primary hover:underline">
             ← Back to products
           </Link>
         </div>
@@ -37,7 +59,6 @@ export function ProductPage() {
 
       <section className="pt-24 pb-16 md:pt-32 md:pb-24">
         <div className="container">
-          {/* Back link */}
           <Link
             to="/#products"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
@@ -49,20 +70,15 @@ export function ProductPage() {
           </Link>
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Left — image + tag/price */}
+            {/* Left — image + info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              {/* Blade illustration placeholder */}
               <div className="aspect-[4/3] rounded-outer bg-gradient-to-br from-section-dark to-secondary overflow-hidden flex items-center justify-center">
-                <svg
-                  viewBox="0 0 200 120"
-                  className="w-3/4"
-                  style={{ color: 'hsl(89 100% 42% / 0.2)' }}
-                  fill="currentColor"
-                >
+                <svg viewBox="0 0 200 120" className="w-3/4"
+                  style={{ color: 'hsl(89 100% 42% / 0.2)' }} fill="currentColor">
                   <ellipse cx="100" cy="60" rx="90" ry="30" transform="rotate(-8 100 60)" />
                 </svg>
               </div>
@@ -81,34 +97,22 @@ export function ProductPage() {
               </div>
             </motion.div>
 
-            {/* Right — details + inquiry form */}
+            {/* Right — details + form */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
               className="flex flex-col gap-8"
             >
-              {/* Product details */}
               <div className="rounded-outer border border-border p-8">
-                <h2 className="font-display text-xl font-bold text-foreground mb-4">
-                  Product details
-                </h2>
+                <h2 className="font-display text-xl font-bold text-foreground mb-4">Product details</h2>
                 <p className="text-muted-foreground leading-relaxed">{product.details}</p>
               </div>
 
-              {/* Inquiry form */}
-              <div
-                className="rounded-outer p-8"
-                style={{
-                  backgroundColor: 'hsl(var(--section-dark))',
-                  color: 'hsl(var(--section-dark-foreground))',
-                }}
-              >
+              <div className="rounded-outer p-8"
+                style={{ backgroundColor: 'hsl(var(--section-dark))', color: 'hsl(var(--section-dark-foreground))' }}>
                 <h2 className="font-display text-xl font-bold mb-2">Send Product Inquiry</h2>
-                <p
-                  className="text-sm mb-6"
-                  style={{ color: 'hsl(var(--section-dark-foreground) / 0.6)' }}
-                >
+                <p className="text-sm mb-6" style={{ color: 'hsl(var(--section-dark-foreground) / 0.6)' }}>
                   We'll get back to you about{' '}
                   <span className="text-primary font-medium">{product.name}</span>.
                 </p>
@@ -121,10 +125,7 @@ export function ProductPage() {
                   >
                     <div className="text-3xl mb-3">✓</div>
                     <p className="font-display font-semibold">Message sent!</p>
-                    <p
-                      className="text-sm mt-1"
-                      style={{ color: 'hsl(var(--section-dark-foreground) / 0.6)' }}
-                    >
+                    <p className="text-sm mt-1" style={{ color: 'hsl(var(--section-dark-foreground) / 0.6)' }}>
                       We'll get back to you shortly.
                     </p>
                   </motion.div>
@@ -140,64 +141,36 @@ export function ProductPage() {
                     </div>
 
                     <div>
-                      <label
-                        htmlFor="pi-name"
-                        className="block text-sm font-medium mb-2"
-                        style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}
-                      >
-                        Name
-                      </label>
-                      <input
-                        id="pi-name"
-                        name="name"
-                        type="text"
-                        required
-                        placeholder="Your name"
-                        className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200"
-                      />
+                      <label htmlFor="pi-name" className="block text-sm font-medium mb-2"
+                        style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}>Name</label>
+                      <input id="pi-name" name="name" type="text" required placeholder="Your name"
+                        className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200" />
                     </div>
 
                     <div>
-                      <label
-                        htmlFor="pi-email"
-                        className="block text-sm font-medium mb-2"
-                        style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}
-                      >
-                        Email
-                      </label>
-                      <input
-                        id="pi-email"
-                        name="email"
-                        type="email"
-                        required
-                        placeholder="you@example.com"
-                        className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200"
-                      />
+                      <label htmlFor="pi-email" className="block text-sm font-medium mb-2"
+                        style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}>Email</label>
+                      <input id="pi-email" name="email" type="email" required placeholder="you@example.com"
+                        className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200" />
                     </div>
 
                     <div>
-                      <label
-                        htmlFor="pi-message"
-                        className="block text-sm font-medium mb-2"
-                        style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}
-                      >
-                        Message
-                      </label>
-                      <textarea
-                        id="pi-message"
-                        name="message"
-                        rows={4}
-                        required
+                      <label htmlFor="pi-message" className="block text-sm font-medium mb-2"
+                        style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}>Message</label>
+                      <textarea id="pi-message" name="message" rows={4} required
                         placeholder="Tell us about your project..."
-                        className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200 resize-none"
-                      />
+                        className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200 resize-none" />
                     </div>
 
-                    <button
-                      type="submit"
-                      className="w-full px-8 py-4 rounded-inner bg-primary text-primary-foreground font-display font-semibold text-base hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200"
-                    >
-                      Send Product Inquiry
+                    {error && (
+                      <p className="text-red-400 text-sm text-center">
+                        Sending failed. Please try again.
+                      </p>
+                    )}
+
+                    <button type="submit" disabled={sending}
+                      className="w-full px-8 py-4 rounded-inner bg-primary text-primary-foreground font-display font-semibold text-base hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200 disabled:opacity-60 disabled:scale-100">
+                      {sending ? 'Sending...' : 'Send Product Inquiry'}
                     </button>
                   </form>
                 )}

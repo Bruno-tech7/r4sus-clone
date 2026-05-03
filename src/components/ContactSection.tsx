@@ -1,14 +1,40 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { FORMSPREE_ID } from '../config'
 
 export function ContactSection() {
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSubmitted(true)
+    setSending(true)
+    setError(false)
+
+    const form = e.currentTarget
+    const data = new FormData(form)
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      })
+
+      if (res.ok) {
+        setSubmitted(true)
+        form.reset()
+      } else {
+        setError(true)
+      }
+    } catch {
+      setError(true)
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -23,7 +49,6 @@ export function ContactSection() {
     >
       <div className="container">
         <div className="max-w-md mx-auto">
-          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -33,15 +58,11 @@ export function ContactSection() {
             <h2 className="font-display text-3xl md:text-4xl font-bold">
               Interested in our products?
             </h2>
-            <p
-              className="mt-4"
-              style={{ color: 'hsl(var(--section-dark-foreground) / 0.6)' }}
-            >
+            <p className="mt-4" style={{ color: 'hsl(var(--section-dark-foreground) / 0.6)' }}>
               Reach out and let's discuss how R4Sus can serve your municipality, business, or home.
             </p>
           </motion.div>
 
-          {/* Success state */}
           {submitted ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -55,7 +76,6 @@ export function ContactSection() {
               </p>
             </motion.div>
           ) : (
-            /* Form */
             <motion.form
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -65,83 +85,58 @@ export function ContactSection() {
             >
               <input type="hidden" name="inquiry_type" value="general" />
 
-              {/* Inquiry type badge */}
               <div className="px-4 py-3 rounded-inner bg-primary/10 border border-primary/20">
                 <p className="text-xs text-primary font-medium uppercase tracking-wider">
                   General inquiry
                 </p>
               </div>
 
-              {/* Name */}
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium mb-2"
-                  style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}
-                >
+                <label htmlFor="name" className="block text-sm font-medium mb-2"
+                  style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}>
                   Name
                 </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  placeholder="Your name"
-                  className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200"
-                />
+                <input id="name" name="name" type="text" required placeholder="Your name"
+                  className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200" />
               </div>
 
-              {/* Email */}
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium mb-2"
-                  style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}
-                >
+                <label htmlFor="email" className="block text-sm font-medium mb-2"
+                  style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}>
                   Email
                 </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="you@example.com"
-                  className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200"
-                />
+                <input id="email" name="email" type="email" required placeholder="you@example.com"
+                  className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200" />
               </div>
 
-              {/* Message */}
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium mb-2"
-                  style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}
-                >
+                <label htmlFor="message" className="block text-sm font-medium mb-2"
+                  style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}>
                   Message
                 </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  required
+                <textarea id="message" name="message" rows={4} required
                   placeholder="Tell us about your project..."
-                  className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200 resize-none"
-                />
+                  className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200 resize-none" />
               </div>
+
+              {error && (
+                <p className="text-red-400 text-sm text-center">
+                  Sending failed. Please try again.
+                </p>
+              )}
 
               <button
                 type="submit"
-                className="w-full px-8 py-4 rounded-inner bg-primary text-primary-foreground font-display font-semibold text-base hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200"
+                disabled={sending}
+                className="w-full px-8 py-4 rounded-inner bg-primary text-primary-foreground font-display font-semibold text-base hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200 disabled:opacity-60 disabled:scale-100"
               >
-                Send Message
+                {sending ? 'Sending...' : 'Send Message'}
               </button>
             </motion.form>
           )}
 
-          <p
-            className="mt-8 text-center text-sm"
-            style={{ color: 'hsl(var(--section-dark-foreground) / 0.4)' }}
-          >
+          <p className="mt-8 text-center text-sm"
+            style={{ color: 'hsl(var(--section-dark-foreground) / 0.4)' }}>
             www.r4sus.com
           </p>
         </div>
