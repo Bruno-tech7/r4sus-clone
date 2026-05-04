@@ -50,12 +50,12 @@ export function Hero() {
             >
               Explore Products
             </button>
-            <a
-              href="#contact"
+            <button
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               className="px-8 py-4 rounded-inner border border-secondary-foreground/30 text-secondary-foreground font-display font-semibold text-base hover:bg-secondary-foreground/10 transition-colors duration-200"
             >
               Get in Touch
-            </a>
+            </button>
           </div>
         </motion.div>
       </div>

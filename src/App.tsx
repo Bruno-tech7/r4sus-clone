@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { ProductPage } from './pages/ProductPage'
 
@@ -7,6 +7,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/products/:slug" element={<ProductPage />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
 }

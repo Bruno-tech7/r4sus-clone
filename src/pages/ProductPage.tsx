@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Navbar } from '../components/Navbar'
 import { getProductBySlug } from '../data/products'
@@ -7,7 +7,15 @@ import { FORMSPREE_ID } from '../config'
 
 export function ProductPage() {
   const { slug } = useParams<{ slug: string }>()
+  const navigate = useNavigate()
   const product = getProductBySlug(slug || '')
+
+  const goBackToProducts = () => {
+    navigate('/')
+    setTimeout(() => {
+      document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })
+    }, 120)
+  }
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(false)
@@ -45,9 +53,12 @@ export function ProductPage() {
         <Navbar />
         <div className="container pt-32 text-center">
           <h1 className="font-display text-3xl font-bold text-foreground">Product not found</h1>
-          <Link to="/#products" className="mt-4 inline-block text-primary hover:underline">
+          <button
+            onClick={goBackToProducts}
+            className="mt-4 inline-block text-primary hover:underline bg-transparent border-0 cursor-pointer"
+          >
             ← Back to products
-          </Link>
+          </button>
         </div>
       </div>
     )
@@ -59,15 +70,15 @@ export function ProductPage() {
 
       <section className="pt-24 pb-16 md:pt-32 md:pb-24">
         <div className="container">
-          <Link
-            to="/#products"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+          <button
+            onClick={goBackToProducts}
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 bg-transparent border-0 cursor-pointer"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M10 12L6 8l4-4" />
             </svg>
             Back to products
-          </Link>
+          </button>
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Left — image + info */}

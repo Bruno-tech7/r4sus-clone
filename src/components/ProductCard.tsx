@@ -48,12 +48,18 @@ export function ProductCard({ product, index, inView }: ProductCardProps) {
         <h3 className="font-display text-xl font-bold text-foreground mb-2">{product.name}</h3>
         <p className="text-muted-foreground text-sm leading-relaxed mb-4">{product.description}</p>
 
-        <Link
-          to={`/products/${product.slug}`}
-          className="text-sm font-medium text-primary hover:text-primary/80 transition-colors duration-200"
-        >
-          View details →
-        </Link>
+        {isComingSoon ? (
+          <span className="text-sm font-medium text-muted-foreground/50 cursor-default">
+            Coming soon
+          </span>
+        ) : (
+          <Link
+            to={`/products/${product.slug}`}
+            className="text-sm font-medium text-primary hover:text-primary/80 transition-colors duration-200"
+          >
+            View details →
+          </Link>
+        )}
       </div>
     </motion.div>
   )
