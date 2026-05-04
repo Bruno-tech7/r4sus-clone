@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-
-const heroBg = `${import.meta.env.BASE_URL}assets/hero-bg.jpg`
+import heroBg from '../assets/hero-bg.jpg'
 
 export function Hero() {
   const scrollToProducts = () => {
