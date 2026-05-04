@@ -1,13 +1,28 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 const navLinks = [
-  { label: 'O nás', href: '#solution' },
-  { label: 'Products', href: '#products' },
+  { label: 'O nás', section: 'solution' },
+  { label: 'Products', section: 'products' },
 ]
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const scrollToSection = (section: string) => {
+    setMenuOpen(false)
+    const doScroll = () => {
+      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' })
+    }
+    if (location.pathname !== '/') {
+      navigate('/')
+      setTimeout(doScroll, 120)
+    } else {
+      doScroll()
+    }
+  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-black/10">
@@ -25,20 +40,20 @@ export function Navbar() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.label}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+              onClick={() => scrollToSection(link.section)}
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 bg-transparent border-0 cursor-pointer"
             >
               {link.label}
-            </a>
+            </button>
           ))}
-          <a
-            href="#contact"
-            className="px-5 py-2 rounded-inner bg-primary text-primary-foreground font-display font-semibold text-sm hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200"
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="px-5 py-2 rounded-inner bg-primary text-primary-foreground font-display font-semibold text-sm hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200 cursor-pointer border-0"
           >
             Get in Touch
-          </a>
+          </button>
         </div>
 
         {/* Mobile hamburger */}
@@ -62,22 +77,20 @@ export function Navbar() {
         <div className="md:hidden bg-white border-b border-border overflow-hidden">
           <div className="container py-4 flex flex-col gap-4">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.label}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => scrollToSection(link.section)}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors text-left bg-transparent border-0 cursor-pointer"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
-            <a
-              href="#contact"
-              onClick={() => setMenuOpen(false)}
-              className="px-5 py-2 rounded-inner bg-primary text-primary-foreground font-display font-semibold text-sm text-center"
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="px-5 py-2 rounded-inner bg-primary text-primary-foreground font-display font-semibold text-sm text-center border-0 cursor-pointer"
             >
               Get in Touch
-            </a>
+            </button>
           </div>
         </div>
       )}
