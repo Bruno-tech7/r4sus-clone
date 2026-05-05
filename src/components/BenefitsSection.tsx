@@ -40,7 +40,7 @@ export function BenefitsSection() {
         </div>
 
         {/* Vision images */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 items-start">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -50,7 +50,7 @@ export function BenefitsSection() {
             <img
               src={visionDiagram}
               alt="Wind turbine blade applications diagram"
-              className="w-full h-full object-cover"
+              className="w-full h-auto block"
             />
           </motion.div>
 
@@ -63,7 +63,7 @@ export function BenefitsSection() {
             <img
               src={visionEndgame}
               alt="Vertical farm — the circular economy end goal"
-              className="w-full h-full object-cover"
+              className="w-full h-auto block"
             />
           </motion.div>
         </div>
