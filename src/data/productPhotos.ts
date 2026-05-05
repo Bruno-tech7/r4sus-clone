@@ -10,7 +10,7 @@ import businessCard1 from '../assets/products/business-card-1.jpg'
 
 export const productPhotos: Record<string, string[]> = {
   'bus-stop': [busStop1],
-  'charging-station': [charging1, charging2],
+  'charging-station': [charging1],
   'bike-shelter': [bikeRack1],
   'bookshelf': [bookcase1],
   'outdoor-park-bench': [bench1],
