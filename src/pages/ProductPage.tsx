@@ -5,17 +5,21 @@ import { Navbar } from '../components/Navbar'
 import { getProductBySlug } from '../data/products'
 import { FORMSPREE_ID } from '../config'
 import { useLang } from '../context/LanguageContext'
+import { productPhotos } from '../data/productPhotos'
+import { PhotoCarousel } from '../components/PhotoCarousel'
 import {
   BusStopIllustration,
   ParkBenchIllustration,
   GardenShedRoofIllustration,
   BookshelfIllustration,
   PlantPotIllustration,
+  ChargingStationIllustration,
 } from '../components/ProductIllustrations'
 
 const illustrations: Record<string, React.FC> = {
   'bus-stop': BusStopIllustration,
   'outdoor-park-bench': ParkBenchIllustration,
+  'charging-station': ChargingStationIllustration,
   'garden-shed-roof': GardenShedRoofIllustration,
   'bookshelf': BookshelfIllustration,
   'plant-pot': PlantPotIllustration,
@@ -73,6 +77,7 @@ export function ProductPage() {
   const locale = product[lang]
   const displayPrice = product.price === 'TBD' ? t.products.priceTBD : product.price
   const Illustration = illustrations[product.slug]
+  const photos = productPhotos[product.slug] ?? []
 
   return (
     <div className="min-h-screen bg-background">
@@ -97,8 +102,14 @@ export function ProductPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <div className="aspect-[4/3] rounded-outer bg-gradient-to-br from-section-dark to-secondary overflow-hidden flex items-center justify-center p-6">
-                {Illustration && <Illustration />}
+              <div className="aspect-[4/3] rounded-outer bg-gradient-to-br from-section-dark to-secondary overflow-hidden">
+                {photos.length > 0 ? (
+                  <PhotoCarousel photos={photos} alt={locale.name} />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center p-6">
+                    {Illustration && <Illustration />}
+                  </div>
+                )}
               </div>
 
               <div className="mt-6">

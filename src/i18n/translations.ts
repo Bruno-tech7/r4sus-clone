@@ -44,7 +44,7 @@ export const translations = {
       p2c: '.',
     },
     products: {
-      h2: 'From turbine to furniture.',
+      h2: 'From turbine to urban life.',
       lead: 'Every product carries the engineering DNA of wind energy infrastructure — built to endure.',
       viewDetails: 'View details →',
       comingSoon: 'Coming soon',
@@ -147,7 +147,7 @@ export const translations = {
       p2c: '.',
     },
     products: {
-      h2: 'Von der Turbine zum Möbel.',
+      h2: 'Von der Turbine in die Stadt.',
       lead: 'Jedes Produkt trägt die Ingenieurs-DNA der Windkraftinfrastruktur — gebaut für die Ewigkeit.',
       viewDetails: 'Details ansehen →',
       comingSoon: 'Demnächst verfügbar',

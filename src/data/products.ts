@@ -55,6 +55,26 @@ export const products: Product[] = [
     },
   },
   {
+    slug: 'charging-station',
+    price: 'Price on request',
+    tag: 'B2G / B2B',
+    isComingSoon: false,
+    en: {
+      name: 'EV Charging Station',
+      description:
+        'A full blade-made charging hub — canopy, columns and signage all repurposed from turbine blades. Solar-ready.',
+      details:
+        'The R4Sus EV Charging Station transforms decommissioned turbine blades into a complete urban charging infrastructure. The aerodynamic blade canopy shelters up to two vehicles while the vertical blade column serves as weather-resistant signage. Charging columns are integrated into blade-shaped housings. The entire structure is engineered to last 50+ years with zero maintenance. Available with integrated solar panel mounting and smart-charging management.',
+    },
+    de: {
+      name: 'E-Ladestation',
+      description:
+        'Ein kompletter Ladepark aus Rotorblättern — Überdachung, Säulen und Beschilderung aus aufbereiteten Turbinenmaterialien. Solar-ready.',
+      details:
+        'Die R4Sus E-Ladestation verwandelt stillgelegte Turbinenblätter in eine vollständige städtische Ladeinfrastruktur. Die aerodynamische Blattkuppel schützt bis zu zwei Fahrzeuge, während die vertikale Blattsäule als wetterfeste Beschilderung dient. Ladesäulen sind in blattförmige Gehäuse integriert. Die gesamte Konstruktion ist für eine wartungsfreie Lebensdauer von 50+ Jahren ausgelegt. Erhältlich mit integrierter Solarpanelmontage und intelligentem Lademanagement.',
+    },
+  },
+  {
     slug: 'garden-shed-roof',
     price: 'TBD',
     tag: 'coming-soon',

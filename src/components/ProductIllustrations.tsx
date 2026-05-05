@@ -136,6 +136,52 @@ export function BookshelfIllustration() {
   )
 }
 
+/** EV Charging Station — blade canopy over two charging columns with car */
+export function ChargingStationIllustration() {
+  return (
+    <SVG>
+      {/* ground platform */}
+      <rect x="18" y="118" width="164" height="3" rx="1" fill={WL} />
+      {/* vertical blade signage (left) */}
+      <path d="M32 22 Q35 24 37 118 L41 118 Q43 24 46 22 Q39 16 32 22 Z"
+        fill={GF} stroke={G} strokeWidth="1.6" strokeLinejoin="round" />
+      {/* blade canopy */}
+      <path d="M54 46 Q118 24 184 42 L182 57 Q118 38 56 60 Z"
+        fill={GF} stroke={G} strokeWidth="1.8" strokeLinejoin="round" />
+      {/* canopy support left */}
+      <rect x="80"  y="57" width="5" height="8" fill={W6} />
+      {/* canopy support right */}
+      <rect x="148" y="55" width="5" height="8" fill={W6} />
+      {/* left charging column */}
+      <rect x="74" y="65" width="18" height="46" rx="2" fill={W2} stroke={W6} strokeWidth="1.5" />
+      {/* charging port left */}
+      <circle cx="83" cy="82" r="5" fill="none" stroke={G} strokeWidth="1.4" />
+      <line x1="83" y1="77" x2="83" y2="70" stroke={G} strokeWidth="1.2" />
+      {/* charging port indicator */}
+      <rect x="77" y="92" width="12" height="5" rx="1" fill={GF} stroke={G} strokeWidth="0.8" />
+      {/* right charging column */}
+      <rect x="142" y="63" width="18" height="48" rx="2" fill={W2} stroke={W6} strokeWidth="1.5" />
+      {/* charging port right */}
+      <circle cx="151" cy="80" r="5" fill="none" stroke={G} strokeWidth="1.4" />
+      <line x1="151" y1="75" x2="151" y2="68" stroke={G} strokeWidth="1.2" />
+      <rect x="145" y="90" width="12" height="5" rx="1" fill={GF} stroke={G} strokeWidth="0.8" />
+      {/* car body */}
+      <path d="M62 100 Q68 88 88 86 L122 86 Q136 86 140 100 Z"
+        fill={W2} stroke={W4} strokeWidth="1.2" />
+      <rect x="62" y="100" width="78" height="14" rx="2" fill={W2} stroke={W4} strokeWidth="1.2" />
+      {/* wheels */}
+      <circle cx="78"  cy="116" r="6" fill="none" stroke={W6} strokeWidth="1.8" />
+      <circle cx="124" cy="116" r="6" fill="none" stroke={W6} strokeWidth="1.8" />
+      <circle cx="78"  cy="116" r="2" fill={W4} />
+      <circle cx="124" cy="116" r="2" fill={W4} />
+      {/* charging cable */}
+      <path d="M92 111 Q85 114 83 111" fill="none" stroke={G} strokeWidth="1.2" strokeDasharray="2,2" />
+      {/* shadow */}
+      <ellipse cx="101" cy="121" rx="60" ry="3" fill={WL} />
+    </SVG>
+  )
+}
+
 /** Plant Pot — blade-segment pot with foliage */
 export function PlantPotIllustration() {
   return (
