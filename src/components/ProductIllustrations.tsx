@@ -182,6 +182,43 @@ export function ChargingStationIllustration() {
   )
 }
 
+/** Bike Shelter — whole blade mounted as curved bicycle canopy */
+export function BikeShelterIllustration() {
+  return (
+    <SVG>
+      {/* ground */}
+      <line x1="10" y1="126" x2="190" y2="126" stroke={WL} strokeWidth="1" />
+      {/* blade shell — large curved form, the whole blade */}
+      <path d="M30 38 Q20 75 28 118 L52 118 Q44 75 68 42 Z"
+        fill={GF} stroke={G} strokeWidth="1.8" strokeLinejoin="round" />
+      {/* blade top surface / outer edge */}
+      <path d="M30 38 Q100 18 172 52 L158 62 Q92 36 68 42 Z"
+        fill={GF} stroke={G} strokeWidth="1.8" strokeLinejoin="round" />
+      {/* blade inner concave surface */}
+      <path d="M52 118 Q70 80 158 62 L158 72 Q72 90 54 126 Z"
+        fill={W2} stroke={W4} strokeWidth="1" />
+      {/* steel base / mount */}
+      <rect x="34" y="118" width="20" height="6" rx="1" fill={W6} stroke={W6} strokeWidth="1" />
+      <rect x="28" y="124" width="32" height="3" rx="1" fill={W4} />
+      {/* bikes — simplified silhouettes */}
+      {/* bike 1 */}
+      <circle cx="100" cy="112" r="9" fill="none" stroke={W6} strokeWidth="1.5" />
+      <circle cx="122" cy="112" r="9" fill="none" stroke={W6} strokeWidth="1.5" />
+      <path d="M109 112 L114 100 L122 103 M114 100 L117 112" stroke={W6} strokeWidth="1.2" fill="none" />
+      <line x1="109" y1="112" x2="100" y2="112" stroke={W6} strokeWidth="1.2" />
+      {/* bike 2 (behind, lighter) */}
+      <circle cx="138" cy="113" r="8" fill="none" stroke={W4} strokeWidth="1.2" />
+      <circle cx="156" cy="113" r="8" fill="none" stroke={W4} strokeWidth="1.2" />
+      <path d="M146 113 L150 102 L156 105 M150 102 L152 113" stroke={W4} strokeWidth="1" fill="none" />
+      {/* handlebar bike 1 */}
+      <line x1="113" y1="100" x2="116" y2="97" stroke={W6} strokeWidth="1.2" />
+      <line x1="115" y1="97" x2="119" y2="98" stroke={W6} strokeWidth="1.2" />
+      {/* shadow */}
+      <ellipse cx="100" cy="127" rx="75" ry="3" fill={WL} />
+    </SVG>
+  )
+}
+
 /** Plant Pot — blade-segment pot with foliage */
 export function PlantPotIllustration() {
   return (

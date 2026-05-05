@@ -14,12 +14,14 @@ import {
   BookshelfIllustration,
   PlantPotIllustration,
   ChargingStationIllustration,
+  BikeShelterIllustration,
 } from '../components/ProductIllustrations'
 
 const illustrations: Record<string, React.FC> = {
   'bus-stop': BusStopIllustration,
   'outdoor-park-bench': ParkBenchIllustration,
   'charging-station': ChargingStationIllustration,
+  'bike-shelter': BikeShelterIllustration,
   'garden-shed-roof': GardenShedRoofIllustration,
   'bookshelf': BookshelfIllustration,
   'plant-pot': PlantPotIllustration,

@@ -75,6 +75,26 @@ export const products: Product[] = [
     },
   },
   {
+    slug: 'bike-shelter',
+    price: '2,000–6,000 €',
+    tag: 'B2G / B2C',
+    isComingSoon: false,
+    en: {
+      name: 'Bike Shelter',
+      description:
+        'A full turbine blade repurposed as a covered bicycle parking shelter. Protects bikes from rain and sun.',
+      details:
+        'A single decommissioned turbine blade is mounted on a steel base to create a sculptural, fully weatherproof bicycle shelter. The natural curve of the blade channels rainwater away while providing complete overhead cover for up to 8 bikes. UV-resistant, maintenance-free composite surface. Available in original white finish or custom colour. Ideal for train stations, offices, schools and public spaces.',
+    },
+    de: {
+      name: 'Fahrradunterstand',
+      description:
+        'Ein ganzes Turbinenblatt als überdachter Fahrradparkplatz. Schützt Fahrräder vor Regen und Sonne.',
+      details:
+        'Ein stillgelegtes Turbinenblatt wird auf einem Stahlsockel montiert und schafft so einen skulpturalen, vollständig wetterfesten Fahrradunterstand. Die natürliche Krümmung des Blatts leitet Regenwasser ab und bietet gleichzeitig vollständigen Überkopfschutz für bis zu 8 Fahrräder. UV-beständige, wartungsfreie Verbundoberfläche. Erhältlich in originalem Weißlack oder individueller Farbe. Ideal für Bahnhöfe, Büros, Schulen und öffentliche Plätze.',
+    },
+  },
+  {
     slug: 'garden-shed-roof',
     price: 'TBD',
     tag: 'coming-soon',
@@ -96,22 +116,22 @@ export const products: Product[] = [
   },
   {
     slug: 'bookshelf',
-    price: 'TBD',
-    tag: 'coming-soon',
-    isComingSoon: true,
+    price: '800–2,500 €',
+    tag: 'B2G / B2C',
+    isComingSoon: false,
     en: {
-      name: 'Bookshelf',
+      name: 'Exterior Bookcase',
       description:
-        'Indoor furniture with unique curved blade aesthetic. Each piece is one-of-a-kind due to blade geometry.',
+        'Weatherproof public book-exchange cabinet built from turbine blade composite panels. A free library for any community space.',
       details:
-        'Transform your interior with a statement piece of sustainable design. Each bookshelf preserves the elegant curves of the original blade, creating a functional sculpture. The composite material is lightweight yet extremely rigid — perfect for heavy book collections.',
+        'The R4Sus Exterior Bookcase repurposes turbine blade composite panels into a fully weatherproof public book-exchange cabinet. The glazed front door seals out rain while the composite shell withstands UV, frost, and vandalism for 50+ years without painting or sealing. Available as a freestanding kiosk or wall-mounted unit. Ideal for parks, schools, libraries, and residential squares.',
     },
     de: {
-      name: 'Bücherregal',
+      name: 'Außen-Bücherschrank',
       description:
-        'Inneneinrichtung mit einzigartiger geschwungener Blatt-Ästhetik. Jedes Stück ist durch die Blattgeometrie ein Unikat.',
+        'Wetterfester öffentlicher Büchertausch-Schrank aus Turbinenblatt-Verbundpanelen. Eine kostenlose Bibliothek für jeden Gemeinschaftsraum.',
       details:
-        'Verwandeln Sie Ihr Interieur mit einem Statement-Stück nachhaltigen Designs. Jedes Bücherregal bewahrt die eleganten Kurven des ursprünglichen Blatts und schafft eine funktionale Skulptur. Das Verbundmaterial ist leicht und dennoch extrem steif — ideal für schwere Büchersammlungen.',
+        'Der R4Sus Außen-Bücherschrank verwendet Turbinenblatt-Verbundpaneele für einen vollständig wetterfesten öffentlichen Büchertausch-Schrank. Die verglaste Fronttür dichtet gegen Regen ab, während die Verbundschale UV, Frost und Vandalismus für 50+ Jahre ohne Lackieren oder Versiegeln standhält. Erhältlich als freistehender Kiosk oder wandmontierte Einheit. Ideal für Parks, Schulen, Bibliotheken und Wohnplätze.',
     },
   },
   {
