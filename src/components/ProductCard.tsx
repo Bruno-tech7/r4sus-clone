@@ -2,6 +2,21 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import type { Product } from '../data/products'
 import { useLang } from '../context/LanguageContext'
+import {
+  BusStopIllustration,
+  ParkBenchIllustration,
+  GardenShedRoofIllustration,
+  BookshelfIllustration,
+  PlantPotIllustration,
+} from './ProductIllustrations'
+
+const illustrations: Record<string, React.FC> = {
+  'bus-stop': BusStopIllustration,
+  'outdoor-park-bench': ParkBenchIllustration,
+  'garden-shed-roof': GardenShedRoofIllustration,
+  'bookshelf': BookshelfIllustration,
+  'plant-pot': PlantPotIllustration,
+}
 
 interface ProductCardProps {
   product: Product
@@ -13,6 +28,7 @@ export function ProductCard({ product, index, inView }: ProductCardProps) {
   const navigate = useNavigate()
   const { lang, t } = useLang()
   const locale = product[lang]
+  const Illustration = illustrations[product.slug]
   const displayPrice = product.price === 'TBD' ? t.products.priceTBD : product.price
 
   const handleClick = () => {
@@ -33,16 +49,11 @@ export function ProductCard({ product, index, inView }: ProductCardProps) {
           : 'hover:shadow-lg cursor-pointer'
       }`}
     >
-      {/* Image area */}
-      <div className="aspect-[4/3] bg-gradient-to-br from-section-dark to-secondary flex items-center justify-center overflow-hidden">
-        <svg
-          viewBox="0 0 200 120"
-          className="w-3/4 transition-transform duration-500 group-hover:scale-105"
-          style={{ color: 'hsl(89 100% 42% / 0.2)' }}
-          fill="currentColor"
-        >
-          <ellipse cx="100" cy="60" rx="90" ry="30" transform="rotate(-8 100 60)" />
-        </svg>
+      {/* Illustration */}
+      <div className="aspect-[4/3] bg-gradient-to-br from-section-dark to-secondary flex items-center justify-center overflow-hidden p-4">
+        <div className="w-full h-full transition-transform duration-500 group-hover:scale-105">
+          {Illustration && <Illustration />}
+        </div>
       </div>
 
       {/* Card content */}

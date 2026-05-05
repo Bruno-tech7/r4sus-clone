@@ -5,6 +5,21 @@ import { Navbar } from '../components/Navbar'
 import { getProductBySlug } from '../data/products'
 import { FORMSPREE_ID } from '../config'
 import { useLang } from '../context/LanguageContext'
+import {
+  BusStopIllustration,
+  ParkBenchIllustration,
+  GardenShedRoofIllustration,
+  BookshelfIllustration,
+  PlantPotIllustration,
+} from '../components/ProductIllustrations'
+
+const illustrations: Record<string, React.FC> = {
+  'bus-stop': BusStopIllustration,
+  'outdoor-park-bench': ParkBenchIllustration,
+  'garden-shed-roof': GardenShedRoofIllustration,
+  'bookshelf': BookshelfIllustration,
+  'plant-pot': PlantPotIllustration,
+}
 
 export function ProductPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -57,6 +72,7 @@ export function ProductPage() {
 
   const locale = product[lang]
   const displayPrice = product.price === 'TBD' ? t.products.priceTBD : product.price
+  const Illustration = illustrations[product.slug]
 
   return (
     <div className="min-h-screen bg-background">
@@ -81,11 +97,8 @@ export function ProductPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <div className="aspect-[4/3] rounded-outer bg-gradient-to-br from-section-dark to-secondary overflow-hidden flex items-center justify-center">
-                <svg viewBox="0 0 200 120" className="w-3/4"
-                  style={{ color: 'hsl(89 100% 42% / 0.2)' }} fill="currentColor">
-                  <ellipse cx="100" cy="60" rx="90" ry="30" transform="rotate(-8 100 60)" />
-                </svg>
+              <div className="aspect-[4/3] rounded-outer bg-gradient-to-br from-section-dark to-secondary overflow-hidden flex items-center justify-center p-6">
+                {Illustration && <Illustration />}
               </div>
 
               <div className="mt-6">
