@@ -5,6 +5,6 @@ import charging1 from '../assets/products/charging-1.png'
 import charging2 from '../assets/products/charging-2.png'
 
 export const productPhotos: Record<string, string[]> = {
-  'bus-stop': [busStop1, busStop2, busStop3],
+  'bus-stop': [busStop1],
   'charging-station': [charging1, charging2],
 }
