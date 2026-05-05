@@ -219,38 +219,125 @@ export function BikeShelterIllustration() {
   )
 }
 
-/** Plant Pot — blade-segment pot with foliage */
+/** Plant Pot — three connected cylindrical blade-section planters, stepping down */
 export function PlantPotIllustration() {
   return (
     <SVG>
       {/* ground */}
-      <line x1="20" y1="130" x2="180" y2="130" stroke={WL} strokeWidth="1" />
-      {/* pot body — blade cross-section shape */}
-      <path d="M65 118 L52 72 Q100 52 148 72 L135 118 Z"
+      <line x1="10" y1="132" x2="190" y2="132" stroke={WL} strokeWidth="1" />
+
+      {/* POT 1 — tallest, left */}
+      <ellipse cx="58" cy="52" rx="26" ry="8" fill={GF} stroke={G} strokeWidth="1.6" />
+      <path d="M32 52 L32 110 Q58 118 84 110 L84 52" fill={W2} stroke={W6} strokeWidth="1.5" />
+      <ellipse cx="58" cy="110" rx="26" ry="8" fill={W2} stroke={W4} strokeWidth="1" />
+      {/* foliage 1 */}
+      <ellipse cx="58" cy="42" rx="28" ry="14" fill="rgba(255,255,255,0.08)" stroke={W4} strokeWidth="1" />
+      <path d="M44 46 Q50 28 58 22 Q66 28 72 46" fill="none" stroke={W6} strokeWidth="1.2" />
+      <path d="M38 50 Q46 34 50 26" fill="none" stroke={W4} strokeWidth="1" />
+      <path d="M78 50 Q70 34 66 26" fill="none" stroke={W4} strokeWidth="1" />
+
+      {/* POT 2 — medium, middle */}
+      <ellipse cx="102" cy="74" rx="22" ry="7" fill={GF} stroke={G} strokeWidth="1.6" />
+      <path d="M80 74 L80 118 Q102 126 124 118 L124 74" fill={W2} stroke={W6} strokeWidth="1.5" />
+      <ellipse cx="102" cy="118" rx="22" ry="7" fill={W2} stroke={W4} strokeWidth="1" />
+      {/* foliage 2 */}
+      <ellipse cx="102" cy="65" rx="24" ry="12" fill="rgba(255,255,255,0.07)" stroke={W4} strokeWidth="1" />
+      <path d="M90 68 Q96 52 102 46 Q108 52 114 68" fill="none" stroke={W6} strokeWidth="1.2" />
+      <path d="M86 72 Q92 58 96 50" fill="none" stroke={W4} strokeWidth="1" />
+
+      {/* POT 3 — shortest, right */}
+      <ellipse cx="142" cy="90" rx="18" ry="6" fill={GF} stroke={G} strokeWidth="1.6" />
+      <path d="M124 90 L124 122 Q142 130 160 122 L160 90" fill={W2} stroke={W6} strokeWidth="1.5" />
+      <ellipse cx="142" cy="122" rx="18" ry="6" fill={W2} stroke={W4} strokeWidth="1" />
+      {/* foliage 3 */}
+      <ellipse cx="142" cy="82" rx="20" ry="10" fill="rgba(255,255,255,0.07)" stroke={W4} strokeWidth="1" />
+      <path d="M132 85 Q138 70 142 65 Q146 70 152 85" fill="none" stroke={W6} strokeWidth="1.2" />
+
+      {/* ground shadow */}
+      <ellipse cx="100" cy="132" rx="80" ry="3" fill={WL} />
+    </SVG>
+  )
+}
+
+/** Business Card — glass fibre composite card with woven texture */
+export function BusinessCardIllustration() {
+  return (
+    <SVG>
+      {/* card body with rounded corners */}
+      <rect x="30" y="36" width="140" height="88" rx="6"
+        fill={W2} stroke={W6} strokeWidth="2" />
+      {/* woven fibre texture — horizontal lines */}
+      {[44, 52, 60, 68, 76, 84, 92, 100, 108, 116].map((y) => (
+        <line key={y} x1="32" y1={y} x2="168" y2={y}
+          stroke={W4} strokeWidth="0.6" strokeDasharray="4,3" />
+      ))}
+      {/* woven fibre texture — diagonal lines */}
+      {[-60, -30, 0, 30, 60, 90, 120].map((offset) => (
+        <line key={offset}
+          x1={30 + offset} y1="36" x2={30 + offset + 88} y2="124"
+          stroke={W4} strokeWidth="0.5" strokeOpacity="0.5" />
+      ))}
+      {/* green shimmer band across card */}
+      <rect x="30" y="72" width="140" height="18" rx="0"
+        fill={GF} />
+      {/* brand text area */}
+      <rect x="44" y="78" width="90" height="8" rx="2"
+        fill="rgba(255,255,255,0.08)" stroke={G} strokeWidth="0.8" />
+      {/* logo dot */}
+      <circle cx="152" cy="52" r="8"
+        fill={GF} stroke={G} strokeWidth="1.4" />
+      <line x1="148" y1="52" x2="156" y2="52" stroke={G} strokeWidth="1.2" />
+      <line x1="152" y1="48" x2="152" y2="56" stroke={G} strokeWidth="1.2" />
+      {/* contact lines at bottom */}
+      <line x1="44" y1="100" x2="110" y2="100" stroke={W4} strokeWidth="1" />
+      <line x1="44" y1="108" x2="90"  y2="108" stroke={W4} strokeWidth="0.8" />
+      {/* card edge highlight */}
+      <rect x="30" y="36" width="140" height="88" rx="6"
+        fill="none" stroke={G} strokeWidth="0.6" strokeOpacity="0.4" />
+      {/* subtle shadow below */}
+      <ellipse cx="100" cy="127" rx="55" ry="4" fill={WL} />
+    </SVG>
+  )
+}
+
+/** Blade Chair — composite side panels with white seat and backrest */
+export function ChairIllustration() {
+  return (
+    <SVG>
+      {/* ground */}
+      <line x1="20" y1="128" x2="180" y2="128" stroke={WL} strokeWidth="1" />
+
+      {/* Left composite side panel — blade cross-section material */}
+      <path d="M40 128 L40 52 L58 44 L58 120 Z"
         fill={GF} stroke={G} strokeWidth="1.8" strokeLinejoin="round" />
-      {/* pot rim ellipse */}
-      <ellipse cx="100" cy="72" rx="48" ry="10"
-        fill="hsl(89 100% 42% / 0.12)" stroke={G} strokeWidth="1.6" />
-      {/* blade texture line on pot */}
-      <path d="M60 90 Q100 82 140 90" stroke={G} strokeWidth="0.8" strokeOpacity="0.5" />
-      {/* base / drainage */}
-      <path d="M65 118 Q100 125 135 118 L133 126 Q100 132 67 126 Z"
-        fill={W2} stroke={W4} strokeWidth="1" />
-      {/* soil surface inside pot */}
-      <ellipse cx="100" cy="68" rx="36" ry="7" fill="rgba(255,255,255,0.06)" />
-      {/* stems */}
-      <path d="M100 64 C96 52 90 40 84 26" stroke={W6} strokeWidth="1.8" />
-      <path d="M100 64 C104 50 112 38 118 24" stroke={W6} strokeWidth="1.8" />
-      <path d="M100 64 C100 52 100 38 100 22" stroke={W6} strokeWidth="2" />
-      {/* leaves */}
-      <path d="M84 26 Q72 18 74 8 Q84 20 84 26"
-        fill={W2} stroke={W4} strokeWidth="1" />
-      <path d="M118 24 Q130 16 128 7 Q118 18 118 24"
-        fill={W2} stroke={W4} strokeWidth="1" />
-      <path d="M100 22 Q91 13 94 4 Q102 14 100 22"
-        fill={W2} stroke={W4} strokeWidth="1" />
+      {/* composite layer lines on left panel */}
+      <line x1="40" y1="80" x2="58" y2="72" stroke={G} strokeWidth="0.7" strokeOpacity="0.5" />
+      <line x1="40" y1="96" x2="58" y2="88" stroke={G} strokeWidth="0.7" strokeOpacity="0.5" />
+      <line x1="40" y1="112" x2="58" y2="104" stroke={G} strokeWidth="0.7" strokeOpacity="0.5" />
+
+      {/* Right composite side panel */}
+      <path d="M160 128 L160 52 L142 44 L142 120 Z"
+        fill={GF} stroke={G} strokeWidth="1.8" strokeLinejoin="round" />
+      {/* composite layer lines on right panel */}
+      <line x1="160" y1="80" x2="142" y2="72" stroke={G} strokeWidth="0.7" strokeOpacity="0.5" />
+      <line x1="160" y1="96" x2="142" y2="88" stroke={G} strokeWidth="0.7" strokeOpacity="0.5" />
+      <line x1="160" y1="112" x2="142" y2="104" stroke={G} strokeWidth="0.7" strokeOpacity="0.5" />
+
+      {/* Backrest — white composite panel */}
+      <path d="M58 44 L142 44 L142 90 L58 90 Z"
+        fill={W2} stroke={W6} strokeWidth="1.6" strokeLinejoin="round" />
+      {/* backrest highlight */}
+      <line x1="70" y1="44" x2="70" y2="90" stroke={W4} strokeWidth="0.6" />
+
+      {/* Seat — white composite panel (sits between side panels) */}
+      <path d="M40 90 L160 90 L160 105 L40 105 Z"
+        fill={W2} stroke={W6} strokeWidth="1.6" strokeLinejoin="round" />
+      {/* seat top face (perspective) */}
+      <path d="M40 90 L58 82 L142 82 L160 90 L40 90 Z"
+        fill="rgba(255,255,255,0.22)" stroke={W6} strokeWidth="1.4" strokeLinejoin="round" />
+
       {/* shadow */}
-      <ellipse cx="100" cy="130" rx="45" ry="3" fill={WL} />
+      <ellipse cx="100" cy="128" rx="60" ry="3" fill={WL} />
     </SVG>
   )
 }

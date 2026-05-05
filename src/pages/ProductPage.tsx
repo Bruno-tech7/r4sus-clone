@@ -15,6 +15,8 @@ import {
   PlantPotIllustration,
   ChargingStationIllustration,
   BikeShelterIllustration,
+  ChairIllustration,
+  BusinessCardIllustration,
 } from '../components/ProductIllustrations'
 
 const illustrations: Record<string, React.FC> = {
@@ -22,9 +24,11 @@ const illustrations: Record<string, React.FC> = {
   'outdoor-park-bench': ParkBenchIllustration,
   'charging-station': ChargingStationIllustration,
   'bike-shelter': BikeShelterIllustration,
+  'chair': ChairIllustration,
   'garden-shed-roof': GardenShedRoofIllustration,
   'bookshelf': BookshelfIllustration,
   'plant-pot': PlantPotIllustration,
+  'business-card': BusinessCardIllustration,
 }
 
 export function ProductPage() {

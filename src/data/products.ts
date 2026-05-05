@@ -42,16 +42,36 @@ export const products: Product[] = [
     en: {
       name: 'Outdoor Park Bench',
       description:
-        'Durable seating made from blade cross-sections. Weather-resistant and maintenance-free for decades.',
+        'A full turbine blade cross-section repurposed as a sculptural bench. Aerodynamic, elegant, maintenance-free.',
       details:
-        "Each bench is cut from the cross-section of a turbine blade, retaining the composite material's incredible strength-to-weight ratio. UV-resistant, waterproof, and graffiti-resistant surface. No painting or sealing required — ever. Available in single-seat and multi-seat configurations.",
+        "Each bench uses the entire aerodynamic cross-section of a decommissioned turbine blade as its seating surface, mounted on a lightweight steel lattice base. The natural foil profile is perfectly ergonomic for sitting. UV-resistant, waterproof, and graffiti-resistant composite surface — no painting or sealing required, ever. Available in lengths from 2m to 6m.",
     },
     de: {
       name: 'Outdoor-Parkbank',
       description:
-        'Robuste Sitzgelegenheiten aus Rotorblatt-Querschnitten. Wetterfest und wartungsfrei für Jahrzehnte.',
+        'Ein kompletter Turbinenblatt-Querschnitt als skulpturale Bank. Aerodynamisch, elegant, wartungsfrei.',
       details:
-        "Jede Bank wird aus dem Querschnitt eines Turbinenblatts geschnitten und behält das unglaubliche Festigkeit-Gewicht-Verhältnis des Verbundmaterials bei. UV-beständige, wasserdichte und graffiti-resistente Oberfläche. Kein Streichen oder Versiegeln erforderlich — niemals. Erhältlich in Einzel- und Mehrplatzkonfigurationen.",
+        "Jede Bank verwendet den gesamten aerodynamischen Querschnitt eines stillgelegten Turbinenblatts als Sitzfläche, montiert auf einem leichten Stahlgittergestell. Das natürliche Folienprofil ist ergonomisch perfekt zum Sitzen. UV-beständige, wasserdichte und graffiti-resistente Verbundoberfläche — kein Streichen oder Versiegeln erforderlich. Erhältlich in Längen von 2 m bis 6 m.",
+    },
+  },
+  {
+    slug: 'chair',
+    price: '1,500 €',
+    tag: 'B2C',
+    isComingSoon: false,
+    en: {
+      name: 'Blade Chair',
+      description:
+        'A statement chair with side panels cut from turbine blade composite. Lightweight, rigid, and built to last a lifetime.',
+      details:
+        'The R4Sus Blade Chair pairs turbine blade composite side panels — exposed to reveal the distinctive layered structure — with a smooth white composite seat and backrest. Incredibly strong yet lightweight, it resists UV, moisture, and temperature extremes without any maintenance. Each chair is one-of-a-kind, shaped by the position of its panels on the original blade. Suitable for indoor and outdoor use.',
+    },
+    de: {
+      name: 'Blatt-Stuhl',
+      description:
+        'Ein besonderer Stuhl mit Seitenpanelen aus Turbinenblatt-Komposit. Leicht, steif und für ein Leben lang gebaut.',
+      details:
+        'Der R4Sus Blatt-Stuhl kombiniert Seitenpaneele aus Turbinenblatt-Komposit — freigelegt um die charakteristische Schichtstruktur zu zeigen — mit einer glatten weißen Verbundsitzfläche und Rückenlehne. Unglaublich stark und dennoch leicht, widersteht er UV, Feuchtigkeit und Temperaturschwankungen ohne jede Wartung. Jeder Stuhl ist ein Unikat, geformt durch die Position seiner Paneele auf dem ursprünglichen Blatt. Für Innen- und Außenbereich geeignet.',
     },
   },
   {
@@ -136,22 +156,42 @@ export const products: Product[] = [
   },
   {
     slug: 'plant-pot',
-    price: 'TBD',
-    tag: 'coming-soon',
-    isComingSoon: true,
+    price: '80–300 €',
+    tag: 'B2C / B2G',
+    isComingSoon: false,
     en: {
       name: 'Plant Pot',
       description:
-        'Decorative planters cut from blade segments. UV-resistant composite lasts a lifetime outdoors.',
+        'Cylindrical blade-composite planters in a cascading trio. UV-resistant, frost-proof, lifetime outdoor durability.',
       details:
-        'Decorative planters carved from blade segments bring industrial elegance to any garden or patio. The composite material is naturally resistant to UV, frost, and water damage. Each pot has a unique shape determined by its position on the original blade.',
+        'Each planter is formed from a section of turbine blade composite, cut and shaped into smooth cylinders that connect into a cascading trio. The composite material is naturally resistant to UV, frost, and water damage — zero maintenance, ever. Each set is unique, shaped by the curvature of the original blade. Available as single, double, or triple-pot configurations. Ideal for public spaces, terraces, and gardens.',
     },
     de: {
       name: 'Blumentopf',
       description:
-        'Dekorative Pflanzgefäße aus Blattsegmenten. UV-beständiges Verbundmaterial hält ein Leben lang im Freien.',
+        'Zylindrische Verbundstoff-Pflanzgefäße im kaskadierenden Trio. UV-beständig, frostfest, lebenslange Haltbarkeit.',
       details:
-        'Dekorative Pflanzgefäße aus Blattsegmenten bringen industrielle Eleganz in jeden Garten oder auf jede Terrasse. Das Verbundmaterial ist von Natur aus UV-, frost- und wasserschadenresistent. Jeder Topf hat eine einzigartige Form, die durch seine Position auf dem ursprünglichen Blatt bestimmt wird.',
+        'Jedes Pflanzgefäß wird aus einem Abschnitt des Turbinenblatt-Verbundstoffs geformt und zu glatten Zylindern verarbeitet, die zu einem kaskadierenden Trio verbunden werden. Das Verbundmaterial ist von Natur aus UV-, frost- und wasserschadenresistent — wartungsfrei für immer. Jedes Set ist einzigartig, geformt durch die Krümmung des ursprünglichen Blatts. Erhältlich als Einzel-, Doppel- oder Dreifach-Topf-Konfiguration.',
+    },
+  },
+  {
+    slug: 'business-card',
+    price: '50–150 €',
+    tag: 'B2C / B2B',
+    isComingSoon: false,
+    en: {
+      name: 'Blade Business Card',
+      description:
+        'Handcrafted business cards made from turbine blade glass fibre. Silver gloss finish, 0.6 mm thick — a card that tells your story.',
+      details:
+        'Each R4Sus Blade Business Card is handcrafted from the glass fibre composite of a decommissioned wind turbine blade. The silver gloss finish showcases the distinctive woven fibre texture that makes every card unique. At 0.6 mm thickness with rounded corners, it has the weight and feel of quality metal — yet it is fully sustainable. Available with custom laser engraving or UV printing. Minimum order: 10 cards.',
+    },
+    de: {
+      name: 'Rotorblatt-Visitenkarte',
+      description:
+        'Handgefertigte Visitenkarten aus Turbinenblatt-Glasfaser. Silber-Hochglanz, 0,6 mm dick — eine Karte, die Ihre Geschichte erzählt.',
+      details:
+        'Jede R4Sus Rotorblatt-Visitenkarte wird handgefertigt aus dem Glasfaser-Verbundstoff eines stillgelegten Windturbinenrotorblatts. Der Silber-Hochglanz zeigt die charakteristische gewebte Faserstruktur, die jede Karte einzigartig macht. Mit 0,6 mm Dicke und abgerundeten Ecken hat sie das Gewicht und das Gefühl von Qualitätsmetall — und ist dennoch vollständig nachhaltig. Erhältlich mit individueller Lasergravur oder UV-Druck. Mindestbestellung: 10 Karten.',
     },
   },
 ]
