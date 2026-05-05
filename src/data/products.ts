@@ -115,26 +115,6 @@ export const products: Product[] = [
     },
   },
   {
-    slug: 'garden-shed-roof',
-    price: 'TBD',
-    tag: 'coming-soon',
-    isComingSoon: true,
-    en: {
-      name: 'Garden Shed Roof',
-      description:
-        "Lightweight, weather-resistant roofing panels. The blade's composite structure offers superior insulation.",
-      details:
-        'Roofing panels made from flattened blade sections offer exceptional insulation and weather resistance. The composite material provides superior thermal performance compared to traditional roofing. Lightweight yet incredibly strong — designed to last 50+ years.',
-    },
-    de: {
-      name: 'Gartenhaus-Dach',
-      description:
-        'Leichte, wetterfeste Dachpaneele. Die Verbundstruktur des Blattes bietet überlegene Dämmung.',
-      details:
-        'Dachpaneele aus abgeflachten Blattsegmenten bieten außergewöhnliche Dämmung und Wetterfestigkeit. Das Verbundmaterial bietet im Vergleich zur traditionellen Bedachung überlegene Wärmeleistung. Leicht und dennoch unglaublich stark — für eine Lebensdauer von 50+ Jahren konzipiert.',
-    },
-  },
-  {
     slug: 'bookshelf',
     price: '800–2,500 €',
     tag: 'B2G / B2C',
