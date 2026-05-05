@@ -1,6 +1,8 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { useLang } from '../context/LanguageContext'
+import visionDiagram from '../assets/vision-diagram.png'
+import visionEndgame from '../assets/vision-endgame.png'
 
 export function BenefitsSection() {
   const ref = useRef<HTMLElement>(null)
@@ -21,7 +23,7 @@ export function BenefitsSection() {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
           {t.benefits.cards.map((item, i) => (
             <motion.div
               key={i}
@@ -35,6 +37,35 @@ export function BenefitsSection() {
               <p className="text-muted-foreground leading-relaxed">{item.body}</p>
             </motion.div>
           ))}
+        </div>
+
+        {/* Vision images */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            className="rounded-outer overflow-hidden"
+          >
+            <img
+              src={visionDiagram}
+              alt="Wind turbine blade applications diagram"
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
+            className="rounded-outer overflow-hidden"
+          >
+            <img
+              src={visionEndgame}
+              alt="Vertical farm — the circular economy end goal"
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
         </div>
       </div>
     </section>
