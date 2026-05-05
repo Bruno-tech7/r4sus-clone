@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import type { Product } from '../data/products'
+import { useLang } from '../context/LanguageContext'
 
 interface ProductCardProps {
   product: Product
@@ -9,16 +10,30 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, index, inView }: ProductCardProps) {
-  const isComingSoon = product.tag === 'Coming soon'
+  const navigate = useNavigate()
+  const { lang, t } = useLang()
+  const locale = product[lang]
+  const displayPrice = product.price === 'TBD' ? t.products.priceTBD : product.price
+
+  const handleClick = () => {
+    if (!product.isComingSoon) {
+      navigate(`/products/${product.slug}`)
+    }
+  }
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.4, delay: 0.08 * index, ease: [0.25, 0.1, 0.25, 1] }}
-      className="group rounded-outer border border-border bg-card overflow-hidden hover:shadow-lg transition-shadow duration-300"
+      onClick={handleClick}
+      className={`group rounded-outer border border-border bg-card overflow-hidden transition-shadow duration-300 ${
+        product.isComingSoon
+          ? 'opacity-75'
+          : 'hover:shadow-lg cursor-pointer'
+      }`}
     >
-      {/* Placeholder image area */}
+      {/* Image area */}
       <div className="aspect-[4/3] bg-gradient-to-br from-section-dark to-secondary flex items-center justify-center overflow-hidden">
         <svg
           viewBox="0 0 200 120"
@@ -35,30 +50,27 @@ export function ProductCard({ product, index, inView }: ProductCardProps) {
         <div className="flex items-center justify-between mb-3">
           <span
             className={`inline-block px-3 py-1 rounded-full text-xs font-medium font-display ${
-              isComingSoon
+              product.isComingSoon
                 ? 'bg-muted text-muted-foreground'
                 : 'bg-primary text-primary-foreground'
             }`}
           >
-            {product.tag}
+            {product.isComingSoon ? t.products.comingSoon : product.tag}
           </span>
-          <span className="text-sm font-medium text-muted-foreground">{product.price}</span>
+          <span className="text-sm font-medium text-muted-foreground">{displayPrice}</span>
         </div>
 
-        <h3 className="font-display text-xl font-bold text-foreground mb-2">{product.name}</h3>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-4">{product.description}</p>
+        <h3 className="font-display text-xl font-bold text-foreground mb-2">{locale.name}</h3>
+        <p className="text-muted-foreground text-sm leading-relaxed mb-4">{locale.description}</p>
 
-        {isComingSoon ? (
-          <span className="text-sm font-medium text-muted-foreground/50 cursor-default">
-            Coming soon
+        {product.isComingSoon ? (
+          <span className="text-sm font-medium text-muted-foreground/50">
+            {t.products.comingSoon}
           </span>
         ) : (
-          <Link
-            to={`/products/${product.slug}`}
-            className="text-sm font-medium text-primary hover:text-primary/80 transition-colors duration-200"
-          >
-            View details →
-          </Link>
+          <span className="text-sm font-medium text-primary group-hover:text-primary/80 transition-colors duration-200">
+            {t.products.viewDetails}
+          </span>
         )}
       </div>
     </motion.div>
