@@ -24,15 +24,10 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-          className="max-w-2xl"
+          className="w-full"
         >
-          <span className="inline-block mb-6 px-4 py-1.5 rounded-full text-sm font-medium bg-primary text-primary-foreground font-display">
-            {t.hero.badge}
-          </span>
-
           <h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] text-secondary-foreground"
-            style={{ textWrap: 'balance' } as React.CSSProperties}
+            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.02] text-secondary-foreground"
           >
             {t.hero.h1}
           </h1>

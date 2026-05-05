@@ -40,7 +40,7 @@ export function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-black/10">
       {/* Single row — logo · nav links · lang switcher */}
       <div className="container flex items-center justify-between h-16 gap-4">
-        {/* Logo */}
+        {/* Logo — far left */}
         <Link
           to="/"
           className="font-display text-lg font-bold text-foreground shrink-0"
@@ -49,7 +49,10 @@ export function Navbar() {
           R4Sus<span className="text-primary">.</span>
         </Link>
 
-        {/* Nav links — scrollable on very small screens */}
+        {/* Spacer */}
+        <div className="flex-1" />
+
+        {/* Nav links + language switcher — all on the right */}
         <div className="flex items-center gap-1 sm:gap-4 overflow-x-auto no-scrollbar">
           {navLinks.map((link) => (
             <button
@@ -64,10 +67,7 @@ export function Navbar() {
               {link.label}
             </button>
           ))}
-        </div>
-
-        {/* Language switcher */}
-        <div className="flex items-center gap-1.5 shrink-0">
+          <span className="text-muted-foreground/20 text-xs mx-1">|</span>
           <LangBtn l="en" />
           <span className="text-muted-foreground/40 text-xs">|</span>
           <LangBtn l="de" />
