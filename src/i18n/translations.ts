@@ -10,7 +10,7 @@ export const translations = {
     },
     hero: {
       badge: 'Redesigned for Sustainability',
-      h1: "Turbine blades shouldn't die in a landfill.",
+      h1: 'Redesigned for Sustainability.',
       subtitle:
         'We repurpose decommissioned wind infrastructure into high-performance urban furniture. Engineering a second life for the giants of the sky.',
       cta: 'Explore Products',
@@ -113,7 +113,7 @@ export const translations = {
     },
     hero: {
       badge: 'Neu gestaltet für Nachhaltigkeit',
-      h1: 'Rotorblätter gehören nicht auf die Deponie.',
+      h1: 'Redesigned for Sustainability.',
       subtitle:
         'Wir verwandeln ausgediente Windkraftanlagen in hochwertige Stadtmöbel. Ein zweites Leben für die Giganten des Himmels.',
       cta: 'Produkte entdecken',
