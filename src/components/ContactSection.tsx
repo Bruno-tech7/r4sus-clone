@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { FORMSPREE_ID } from '../config'
 import { useLang } from '../context/LanguageContext'
+import { products } from '../data/products'
 
 export function ContactSection() {
   const ref = useRef<HTMLElement>(null)
@@ -9,7 +10,7 @@ export function ContactSection() {
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(false)
-  const { t } = useLang()
+  const { lang, t } = useLang()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -28,6 +29,9 @@ export function ContactSection() {
     } catch { setError(true) }
     finally { setSending(false) }
   }
+
+  const inputClass =
+    'w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200'
 
   return (
     <section
@@ -77,25 +81,59 @@ export function ContactSection() {
                 <p className="text-xs text-primary font-medium uppercase tracking-wider">{t.contact.badge}</p>
               </div>
 
+              {/* Product dropdown */}
+              <div>
+                <label htmlFor="product-select" className="block text-sm font-medium mb-2"
+                  style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}>
+                  {t.contact.productLabel}
+                </label>
+                <div className="relative">
+                  <select
+                    id="product-select"
+                    name="product"
+                    className={`${inputClass} appearance-none cursor-pointer pr-10`}
+                    defaultValue=""
+                  >
+                    <option value="" disabled>{t.contact.productPh}</option>
+                    <option value="general">{t.contact.productGeneral}</option>
+                    {products.map((p) => (
+                      <option key={p.slug} value={p[lang].name}>
+                        {p[lang].name}{p.isComingSoon ? ' ⏳' : ''}
+                      </option>
+                    ))}
+                  </select>
+                  {/* Custom arrow */}
+                  <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                      stroke="currentColor" strokeWidth="2" className="text-muted-foreground">
+                      <path d="M4 6l4 4 4-4" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              {/* Name */}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2"
                   style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}>{t.contact.name}</label>
                 <input id="name" name="name" type="text" required placeholder={t.contact.namePh}
-                  className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200" />
+                  className={inputClass} />
               </div>
 
+              {/* Email */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium mb-2"
                   style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}>{t.contact.email}</label>
                 <input id="email" name="email" type="email" required placeholder={t.contact.emailPh}
-                  className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200" />
+                  className={inputClass} />
               </div>
 
+              {/* Message */}
               <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-2"
                   style={{ color: 'hsl(var(--section-dark-foreground) / 0.8)' }}>{t.contact.message}</label>
                 <textarea id="message" name="message" rows={4} required placeholder={t.contact.messagePh}
-                  className="w-full px-4 py-3 rounded-inner bg-muted text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow duration-200 resize-none" />
+                  className={`${inputClass} resize-none`} />
               </div>
 
               {error && <p className="text-red-400 text-sm text-center">{t.contact.error}</p>}
